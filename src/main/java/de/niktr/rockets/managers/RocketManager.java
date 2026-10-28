@@ -17,6 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RocketManager {
@@ -26,6 +27,7 @@ public class RocketManager {
     private final Map<Integer, Double> boostMultiplierMap = new HashMap<Integer, Double>();
     private final Map<Integer, Boolean> sustainedMap = new HashMap<Integer, Boolean>();
     private boolean recipesEnabled = true;
+    private String language = "en";
 
     public RocketManager(NiktrickRocketsPlugin plugin) {
         this.plugin = plugin;
@@ -35,6 +37,11 @@ public class RocketManager {
     public void loadConfig() {
         plugin.reloadConfig();
         FileConfiguration config = plugin.getConfig();
+
+        language = config.getString("language", "en").toLowerCase(Locale.ROOT);
+        if (!"de".equals(language) && !"en".equals(language)) {
+            language = "en";
+        }
 
         recipesEnabled = config.getBoolean("rockets.recipes-enabled", true);
 
@@ -48,6 +55,22 @@ public class RocketManager {
             boostMultiplierMap.put(i, config.getDouble(path + "boost-multiplier", defaultBoosts[i - 1]));
             sustainedMap.put(i, config.getBoolean(path + "sustained-propulsion", defaultSustained[i - 1]));
         }
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String lang) {
+        String clean = (lang != null && lang.equalsIgnoreCase("de")) ? "de" : "en";
+        this.language = clean;
+        plugin.getConfig().set("language", clean);
+        plugin.saveConfig();
+        registerRecipes();
+    }
+
+    public boolean isDe() {
+        return "de".equalsIgnoreCase(language);
     }
 
     public void registerRecipes() {
@@ -65,9 +88,10 @@ public class RocketManager {
         Material paper = Material.PAPER;
         Material gunpowder = XRocketVersion.GUNPOWDER_MAT;
         Material fireworkMat = XRocketVersion.FIREWORK_MAT;
+        boolean de = isDe();
 
         // Tier 1: 1 Paper + 1 Gunpowder -> 3x Tier 1
-        ShapelessRecipe t1Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_1", RocketItemFactory.createRocket(1, 3));
+        ShapelessRecipe t1Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_1", RocketItemFactory.createRocket(1, 3, de));
         if (t1Recipe != null) {
             t1Recipe.addIngredient(paper);
             t1Recipe.addIngredient(gunpowder);
@@ -75,7 +99,7 @@ public class RocketManager {
         }
 
         // Tier 2: 1 Paper + 2 Gunpowder -> 3x Tier 2
-        ShapelessRecipe t2Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_2", RocketItemFactory.createRocket(2, 3));
+        ShapelessRecipe t2Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_2", RocketItemFactory.createRocket(2, 3, de));
         if (t2Recipe != null) {
             t2Recipe.addIngredient(paper);
             t2Recipe.addIngredient(gunpowder);
@@ -84,7 +108,7 @@ public class RocketManager {
         }
 
         // Tier 3: 1 Paper + 3 Gunpowder -> 3x Tier 3
-        ShapelessRecipe t3Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_3", RocketItemFactory.createRocket(3, 3));
+        ShapelessRecipe t3Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_3", RocketItemFactory.createRocket(3, 3, de));
         if (t3Recipe != null) {
             t3Recipe.addIngredient(paper);
             t3Recipe.addIngredient(gunpowder);
@@ -94,7 +118,7 @@ public class RocketManager {
         }
 
         // Tier 4: 1x Firework + 1 Soul Sand + 1 Blaze Powder -> 1x Tier 4
-        ShapelessRecipe t4Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_4", RocketItemFactory.createRocket(4, 1));
+        ShapelessRecipe t4Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_4", RocketItemFactory.createRocket(4, 1, de));
         if (t4Recipe != null) {
             Material soulSand = XRocketVersion.safeMaterial("SOUL_SAND", "SOUL_SAND", Material.SAND);
             Material blazePowder = XRocketVersion.safeMaterial("BLAZE_POWDER", "BLAZE_POWDER", Material.REDSTONE);
@@ -105,7 +129,7 @@ public class RocketManager {
         }
 
         // Tier 5: 1x Firework + 1 Dragon's Breath (or Blaze Rod) + 1 Gold Ingot -> 1x Tier 5
-        ShapelessRecipe t5Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_5", RocketItemFactory.createRocket(5, 1));
+        ShapelessRecipe t5Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_5", RocketItemFactory.createRocket(5, 1, de));
         if (t5Recipe != null) {
             Material dragonsBreath = XRocketVersion.safeMaterial("DRAGON_BREATH", null, Material.BLAZE_ROD);
             Material goldIngot = XRocketVersion.safeMaterial("GOLD_INGOT", "GOLD_INGOT", Material.GOLD_INGOT);
@@ -116,7 +140,7 @@ public class RocketManager {
         }
 
         // Tier 6: 1x Firework + 1 Echo Shard (or Eye of Ender) + 1 Netherite Scrap (or Diamond) -> 1x Tier 6
-        ShapelessRecipe t6Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_6", RocketItemFactory.createRocket(6, 1));
+        ShapelessRecipe t6Recipe = XRocketVersion.createShapelessRecipe(plugin, "rocket_tier_6", RocketItemFactory.createRocket(6, 1, de));
         if (t6Recipe != null) {
             Material echoShard = XRocketVersion.safeMaterial("ECHO_SHARD", "EYE_OF_ENDER", Material.DIAMOND);
             Material scrap = XRocketVersion.safeMaterial("NETHERITE_SCRAP", null, Material.EMERALD);

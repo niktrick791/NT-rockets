@@ -1,44 +1,104 @@
-# 🚀 niktrick-rockets — High-Speed Elytra Rocket Tiers 1–6
+# niktrick-rockets
 
-[![Platform](https://img.shields.io/badge/Platform-Paper%20%7C%20Purpur-brightgreen.svg)](#)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21+-blue.svg)](#)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![Language: English](https://img.shields.io/badge/Language-English-blue.svg)](#)
+[![Deutsch](https://img.shields.io/badge/Sprache-Deutsch-orange.svg)](README_DE.md)
+[![Platform: Paper / Purpur / Spigot](https://img.shields.io/badge/Platform-Paper%20%7C%20Purpur%20%7C%20Spigot-green.svg)](#)
+[![Minecraft: 1.8.8 - 1.21.4+](https://img.shields.io/badge/Minecraft-1.8.8--1.21.4%2B-brightgreen.svg)](#)
+[![Java: 8+](https://img.shields.io/badge/Java-8%2B-red.svg)](#)
 
-A standalone Minecraft Paper/Purpur plugin adding enhanced Elytra rockets in **6 distinct tiers** with custom flight durations, propulsion multipliers, sound effects, and persistent particle trails (Dragon Breath, Soul Fire, Sonic Boom).
+[🇩🇪 Zur deutschen Version wechseln](README_DE.md) | [🇬🇧 English Version](README.md)
 
 ---
 
-## ✨ Features
+Universal, high-performance Elytra propulsion plugin for Minecraft **1.8.8 to 1.21.4+** (Paper, Purpur, Spigot).
+
+Adds 6 distinct tiers of flight rockets with custom flight durations, acceleration multipliers, custom particle trails (Soul Flame, Dragon Breath, Sonic Boom), and sustained propulsion. On legacy versions (such as 1.8.8 without Elytra), rockets function as directional jetpacks!
+
+---
+
+## Features
 
 - **🚀 6 Tiered Flight Levels**:
-  - **Tier 1 (Base)**: Standard duration (~1.5s), 1.0x propulsion.
-  - **Tier 2 (Improved)**: ~2.5s duration, 1.15x propulsion.
-  - **Tier 3 (Strong)**: ~3.5s duration, 1.30x propulsion, Flame trail.
-  - **Tier 4 (Turbo)**: ~5.5s duration, 1.55x propulsion, Soul Fire trail.
-  - **Tier 5 (Mega Turbine)**: ~8.0s duration, 1.85x propulsion, Dragon Breath trail.
-  - **Tier 6 (Hypersonic MAX)**: ~11.0s duration, 2.30x propulsion, Warden Sonic Boom launch sound and End Rod trail!
+  - **Tier 1 (Basic)**: Standard flight (~1.5s duration, 1.0x boost).
+  - **Tier 2 (Enhanced)**: Extended flight (~2.5s duration, 1.15x boost).
+  - **Tier 3 (Powerful)**: Long flight (~3.5s duration, 1.30x boost, flame trail).
+  - **Tier 4 (Turbo Boost)**: Very long flight (~5.5s duration, 1.55x boost, soul flame trail).
+  - **Tier 5 (Mega Turbine)**: Extremely long flight (~8.0s duration, 1.85x boost, dragon breath trail).
+  - **Tier 6 (Hypersonic MAX)**: Maximum flight (~11.0s duration, 2.30x boost, Warden Sonic Boom sound & End Rod sparks!).
 - **⚡ Sustained Propulsion**:
-  - Higher tiers continuously accelerate the player forward while gliding, enabling massive speed and long-distance travel.
-- **🛠️ Custom Crafting Recipes**:
-  - Easily craftable in survival mode using gunpowder, paper, and progression materials.
-- **🎨 Adventure / MiniMessage Support**:
-  - Beautiful gradients on items and lore with PersistentDataContainer tags.
+  - Tiers 4 to 6 feature sustained thrusters that actively propel the player forward while gliding, making long-distance traversal fast and thrilling.
+- **🛠️ Survival Crafting Recipes**:
+  - Naturally craftable in vanilla survival using shapeless crafting recipes (recipes update dynamically when language changes).
+- **🌐 Bilingual & In-Game Language Switching**:
+  - Configurable in `config.yml` (`language: "en"` or `"de"`).
+  - Toggle live anytime with `/rocket lang <de|en>`.
+- **🔄 Cross-Version Compatibility**:
+  - Backward compatible down to Minecraft 1.8.8 (directional jetpack propulsion fallback) all the way up to modern 1.21.4+ Elytra aerodynamics.
 
 ---
 
-## 📜 Commands & Permissions
+## Commands & Permissions
 
-| Command | Permission | Description |
-|---|---|---|
-| `/rocket get <tier> [amount]` | `niktrick.rockets.admin` | Gives yourself custom rockets |
-| `/rocket give <player> <tier> [amount]` | `niktrick.rockets.admin` | Gives a player custom rockets |
-| `/rocket info` | `niktrick.rockets.use` | Displays rocket info |
-| `/rocket reload` | `niktrick.rockets.admin` | Reloads `config.yml` |
+| Command | Description | Permission |
+| :--- | :--- | :--- |
+| `/rocket info` | Displays rocket tiers and flight specs | *None* |
+| `/rocket get <1-6> [amount]` | Gives yourself custom tiered rockets | `niktrick.rockets.admin` |
+| `/rocket give <player> <1-6> [amount]` | Gives tiered rockets to a player | `niktrick.rockets.admin` |
+| `/rocket reload` | Reloads `config.yml` and re-registers crafting recipes | `niktrick.rockets.admin` |
+| `/rocket lang <de\|en>` | Changes plugin language live (Global) | `niktrick.rockets.admin` |
 
 ---
 
-## 📦 Installation
+## Configuration (`config.yml`)
 
-1. Drop `niktrick-rockets-1.0.0.jar` into your server's `plugins/` directory.
-2. Restart your server.
-3. Enjoy supersonic Elytra flight!
+```yaml
+# Language setting: "en" for English, "de" for German
+language: "en"
+
+rockets:
+  recipes-enabled: true
+
+  tier-1:
+    duration-ticks: 25
+    boost-multiplier: 1.0
+    sustained-propulsion: false
+    trail-particle: FIREWORK
+
+  tier-2:
+    duration-ticks: 45
+    boost-multiplier: 1.15
+    sustained-propulsion: false
+    trail-particle: FIREWORK
+
+  tier-3:
+    duration-ticks: 70
+    boost-multiplier: 1.30
+    sustained-propulsion: false
+    trail-particle: FLAME
+
+  tier-4:
+    duration-ticks: 110
+    boost-multiplier: 1.55
+    sustained-propulsion: true
+    trail-particle: SOUL_FIRE_FLAME
+
+  tier-5:
+    duration-ticks: 160
+    boost-multiplier: 1.85
+    sustained-propulsion: true
+    trail-particle: DRAGON_BREATH
+
+  tier-6:
+    duration-ticks: 220
+    boost-multiplier: 2.30
+    sustained-propulsion: true
+    trail-particle: END_ROD
+```
+
+---
+
+## Compatibility
+
+- **Minecraft**: 1.8.8, 1.12.2, 1.16.5, 1.17, 1.18, 1.19, 1.20, 1.21.x+
+- **Server Software**: Paper, Purpur, Spigot
+- **Java**: 8 to 25+ (compiled to Java 8 bytecode for maximum compatibility)
