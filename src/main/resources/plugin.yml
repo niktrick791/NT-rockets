@@ -1,0 +1,21 @@
+name: niktrick-rockets
+version: '${version}'
+main: de.niktr.rockets.NiktrickRocketsPlugin
+api-version: '1.21'
+author: niktr
+description: Enhanced custom rockets with flight tiers 1-6, propulsion boosts, custom trails and sound effects.
+
+commands:
+  rocket:
+    description: Manage custom rockets (Tiers 1-6)
+    usage: /rocket <get|give|info|reload> ...
+    permission: niktrick.rockets.admin
+    aliases: [rockets, rakete, raketen]
+
+permissions:
+  niktrick.rockets.admin:
+    description: Allows giving, inspecting and reloading custom rockets
+    default: op
+  niktrick.rockets.use:
+    description: Allows using custom rockets
+    default: true

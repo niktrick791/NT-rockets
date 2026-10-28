@@ -1,0 +1,42 @@
+# ======================================================
+#            niktrick-rockets Configuration
+# ======================================================
+
+rockets:
+  recipes-enabled: true
+
+  tier-1:
+    duration-ticks: 25
+    boost-multiplier: 1.0
+    sustained-propulsion: false
+    trail-particle: FIREWORK
+
+  tier-2:
+    duration-ticks: 45
+    boost-multiplier: 1.15
+    sustained-propulsion: false
+    trail-particle: FIREWORK
+
+  tier-3:
+    duration-ticks: 70
+    boost-multiplier: 1.30
+    sustained-propulsion: false
+    trail-particle: FLAME
+
+  tier-4:
+    duration-ticks: 110
+    boost-multiplier: 1.55
+    sustained-propulsion: true
+    trail-particle: SOUL_FIRE_FLAME
+
+  tier-5:
+    duration-ticks: 160
+    boost-multiplier: 1.85
+    sustained-propulsion: true
+    trail-particle: DRAGON_BREATH
+
+  tier-6:
+    duration-ticks: 220
+    boost-multiplier: 2.30
+    sustained-propulsion: true
+    trail-particle: END_ROD
