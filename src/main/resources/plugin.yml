@@ -1,7 +1,6 @@
 name: niktrick-rockets
 version: '${version}'
 main: de.niktr.rockets.NiktrickRocketsPlugin
-api-version: '1.21'
 author: niktr
 description: Enhanced custom rockets with flight tiers 1-6, propulsion boosts, custom trails and sound effects.
 
