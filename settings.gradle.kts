@@ -1,1 +1,1 @@
-rootProject.name = "niktrick-rockets"
+rootProject.name = "NT-rockets"

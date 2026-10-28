@@ -38,7 +38,7 @@ tasks.processResources {
 }
 
 tasks.jar {
-    archiveBaseName.set("niktrick-rockets")
+    archiveBaseName.set("NT-rockets")
     archiveClassifier.set("")
     archiveVersion.set("1.0.0")
 }

@@ -1,4 +1,4 @@
-name: niktrick-rockets
+name: NT-rockets
 version: '${version}'
 main: de.niktr.rockets.NiktrickRocketsPlugin
 author: niktr
